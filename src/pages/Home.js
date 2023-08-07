@@ -5,11 +5,11 @@ import LayoutMaster from "../layouts/LayoutMaster";
 import ProductModel from "../models/ProductModel";
 import ProductItem from "../components/products/ProductItem";
 import { Link } from "react-router-dom";
+import Category from "./Category";
 
 function Home(props) {
   const [products, setProducts] = useState([]);
   const cart = useSelector((state) => state.cart);
-
 
   useEffect(() => {
     ProductModel.all()
@@ -49,17 +49,16 @@ function Home(props) {
                 >
                   <img
                     className="position-absolute w-100 h-100"
-                    src="img/carousel-1.jpg"
+                    src="https://www.flynow.vn/blog/wp-content/uploads/2017/03/h%E1%BA%A3i_s%E1%BA%A3n.jpg"
                     style={{ objectFit: "cover" }}
                   />
                   <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div className="p-3" style={{ maxWidth: 700 }}>
                       <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                        Men Fashion
+                        Fresh
                       </h1>
                       <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
-                        Lorem rebum magna amet lorem magna erat diam stet.
-                        Sadips duo stet amet amet ndiam elitr ipsum diam
+                        Fresh, delicious, nutritious, cheap seafood
                       </p>
                       <a
                         className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
@@ -76,17 +75,16 @@ function Home(props) {
                 >
                   <img
                     className="position-absolute w-100 h-100"
-                    src="img/carousel-2.jpg"
+                    src="https://afamilycdn.com/150157425591193600/2023/6/27/photo-3-1687854521216732901120-1687854959443-1687854959710386710027.png"
                     style={{ objectFit: "cover" }}
                   />
                   <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div className="p-3" style={{ maxWidth: 700 }}>
                       <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                        Women Fashion
+                        Clean
                       </h1>
                       <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
-                        Lorem rebum magna amet lorem magna erat diam stet.
-                        Sadips duo stet amet amet ndiam elitr ipsum diam
+                        Fresh, delicious, nutritious, cheap seafood
                       </p>
                       <a
                         className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
@@ -103,17 +101,16 @@ function Home(props) {
                 >
                   <img
                     className="position-absolute w-100 h-100"
-                    src="img/carousel-3.jpg"
+                    src="https://product.hstatic.net/1000030244/product/332772456_1579902735814746_8411294262080932413_n__2___1__0cab450889de49dc98ac748f59bd5bc1_grande.png"
                     style={{ objectFit: "cover" }}
                   />
                   <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div className="p-3" style={{ maxWidth: 700 }}>
                       <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                        Kids Fashion
+                        Cheap
                       </h1>
                       <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
-                        Lorem rebum magna amet lorem magna erat diam stet.
-                        Sadips duo stet amet amet ndiam elitr ipsum diam
+                        Fresh, delicious, nutritious, cheap seafood
                       </p>
                       <a
                         className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
@@ -129,7 +126,11 @@ function Home(props) {
           </div>
           <div className="col-lg-4">
             <div className="product-offer mb-30" style={{ height: 200 }}>
-              <img className="img-fluid" src="img/offer-1.jpg" alt="" />
+              <img
+                className="img-fluid"
+                src="https://product.hstatic.net/1000030244/product/noi_dung_doan_van_ban_cua_ban__600___600_px___6__3c79c18a86a04a6c8522630462f5c622_grande.png"
+                alt=""
+              />
               <div className="offer-text">
                 <h6 className="text-white text-uppercase">Save 20%</h6>
                 <h3 className="text-white mb-3">Special Offer</h3>
@@ -139,7 +140,11 @@ function Home(props) {
               </div>
             </div>
             <div className="product-offer mb-30" style={{ height: 200 }}>
-              <img className="img-fluid" src="img/offer-2.jpg" alt="" />
+              <img
+                className="img-fluid"
+                src="https://product.hstatic.net/1000030244/product/img_0636_2921637974104144856cc709b3bde4aa_large.jpeg"
+                alt=""
+              />
               <div className="offer-text">
                 <h6 className="text-white text-uppercase">Save 20%</h6>
                 <h3 className="text-white mb-3">Special Offer</h3>
@@ -211,7 +216,9 @@ function Home(props) {
                 </div>
                 <div className="flex-fill pl-3">
                   <h6>Category Name</h6>
-                  <small className="text-body">100 Products</small>
+                  <small className="text-body">
+                    100 products
+                  </small>
                 </div>
               </div>
             </a>

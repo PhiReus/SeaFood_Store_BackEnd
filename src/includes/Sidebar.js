@@ -1,8 +1,25 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 function Sidebar(props) {
   const cart = useSelector((state) => state.cart);
+  // const navigate = useNavigate();
+
+  // const handleClickCart = () => {
+  //   if(cart.length === 0) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Giỏ hàng trống !",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //   }
+  //   else{
+  //     navigate('/cart');
+      
+  //   }
+  // }
 
   return (
     <div>
@@ -148,7 +165,7 @@ function Sidebar(props) {
                         className="badge text-secondary border border-secondary rounded-circle"
                         style={{ paddingBottom: 2 }}
                       >
-                        {cart.length} 
+                        {cart.length}
                       </span>
                     </Link>
                   </div>

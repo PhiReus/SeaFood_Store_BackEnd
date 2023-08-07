@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import UserModel from "../../models/UserModel";
+import CustomerModel from "../../models/CustomerModel";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().required("Vui lòng nhập email !"),
@@ -19,9 +19,9 @@ function LogInForm(props) {
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {
-    UserModel.login(values)
+    CustomerModel.login(values)
       .then((res) => {
-        UserModel.setCookie("user", JSON.stringify(res.user), res.expires_in);
+        CustomerModel.setCookie("customer", JSON.stringify(res.customer), res.expires_in);
         localStorage.setItem("token", res.access_token);
         navigate("/checkout");
         handleLoginSuccess();

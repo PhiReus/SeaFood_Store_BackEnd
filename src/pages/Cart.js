@@ -4,16 +4,17 @@ import LayoutMaster from "../layouts/LayoutMaster";
 import { SET_CART } from "../redux/action";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
+import CustomerModel from "../models/CustomerModel";
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [cartTotal, setCartTotal] = useState(0);
   const [isRemoving, setIsRemoving] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
+  const image = "http://127.0.0.1:8000/";
 
   useEffect(() => {
     let total = 0;
@@ -45,8 +46,23 @@ function Cart(props) {
       payload: newCart,
     });
     setIsRemoving(true);
+    alert("Xóa sản phẩm ?");
+   
   };
 
+  const handleCheckout = () => {
+    let customer = CustomerModel.getCookie("customer");
+    customer = customer ? JSON.parse(customer) : "";
+
+    if (!customer) {
+      alert("Bạn cần đăng nhập để thanh toán đơn hàng của bạn !");
+      navigate("/login");
+    } else {
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch({ type: SET_CART, payload: cart });
+      navigate("/checkout");
+    }
+  };
   return (
     <LayoutMaster>
       <>
@@ -71,6 +87,7 @@ function Cart(props) {
               <table className="table table-light table-borderless table-hover text-center mb-0">
                 <thead className="thead-dark">
                   <tr>
+                    <th>Image</th>
                     <th>Products</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -83,12 +100,12 @@ function Cart(props) {
                     <tr key={index}>
                       <td className="align-middle">
                         <img
-                          src={CartItem.product.image}
+                          src={image + CartItem.product.image}
                           alt=""
                           style={{ width: 50 }}
                         />{" "}
-                        {CartItem.product.name}
                       </td>
+                      <td className="align-middle">{CartItem.product.name}</td>
                       <td className="align-middle">
                         <NumericFormat
                           value={CartItem.product.price}
@@ -174,12 +191,17 @@ function Cart(props) {
                         thousandSeparator="."
                         decimalSeparator=","
                         displayType="text"
-                      />{" "}VND
+                      />{" "}
+                      VND
                     </h5>
                   </div>
-                  <Link to="/checkout" className="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                  <button
+                    onClick={handleCheckout}
+                    href=""
+                    className="btn btn-block btn-primary font-weight-bold my-3 py-3"
+                  >
                     Proceed To Checkout
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

@@ -1,18 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/action";
 
 function ProductItem({ product }) {
+
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const image = "http://127.0.0.1:8000/";
+
+  const handleAddToCart = () => {
+    // Chuẩn bị thông tin sản phẩm cần thêm vào giỏ hàng
+    let item = {
+      product_id: product.id,
+      quantity: 1, // Số lượng sản phẩm mặc định là 1 (bạn có thể thay đổi nếu muốn)
+      product: product,
+    };
+    if(product.id === cart.product) {
+      product.quantity += 1;
+      }else{
+      // Gửi thông tin sản phẩm đến Redux store thông qua action addToCart
+      dispatch(addToCart(item));
+    }
+  };
 
   return (
     <>
       <div className="product-item bg-light mb-4">
         <div className="product-img position-relative overflow-hidden">
-          <img className="img-fluid w-100" src={product.image} alt="" />
+          <img className="img-fluid w-100" src={image + product.image} alt="" />
           <div className="product-action">
-            <a className="btn btn-outline-dark btn-square" href="">
+            <button onClick={handleAddToCart} className="btn btn-outline-dark btn-square" href="">
               <i className="fa fa-shopping-cart" />
-            </a>
+            </button>
             <Link
               to={"/detail/" + product.id}
               className="btn btn-outline-dark btn-square"

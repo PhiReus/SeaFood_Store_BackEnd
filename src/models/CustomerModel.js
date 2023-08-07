@@ -1,8 +1,8 @@
 import axios from "axios";
 
-class UserModel {
+class CustomerModel {
   constructor() {
-    this.api_url = "http://127.0.0.1:8000/api/";
+    this.api_url = "http://127.0.0.1:8000/api/auth/";
   }
   async login(credentials) {
     const res = await axios.post(this.api_url + "login", credentials);
@@ -34,10 +34,10 @@ class UserModel {
     let ca = decodedCookie.split(";");
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];
-      while (c.charAt(0) == " ") {
+      while (c.charAt(0) === " ") {
         c = c.substring(1);
       }
-      if (c.indexOf(name) == 0) {
+      if (c.indexOf(name) === 0) {
         return c.substring(name.length, c.length);
       }
     }
@@ -56,4 +56,4 @@ class UserModel {
   }
 }
 
-export default new UserModel();
+export default new CustomerModel();
