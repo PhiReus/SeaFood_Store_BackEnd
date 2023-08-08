@@ -2,28 +2,49 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/action";
+import { SET_CART } from "../../redux/action";
 
 function ProductItem({ product }) {
-
   const cart = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
   const image = "http://127.0.0.1:8000/";
 
   const handleAddToCart = () => {
-    // Chuẩn bị thông tin sản phẩm cần thêm vào giỏ hàng
-    let item = {
-      product_id: product.id,
-      quantity: 1, // Số lượng sản phẩm mặc định là 1 (bạn có thể thay đổi nếu muốn)
-      product: product,
-    };
-    if(product.id === cart.product) {
-      product.quantity += 1;
-      }else{
-      // Gửi thông tin sản phẩm đến Redux store thông qua action addToCart
-      dispatch(addToCart(item));
+    // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+    //phải là mãng để có thể sử dụng find()
+    const product_cart = cart.find((item) => item.product_id === product.id);
+
+    if (product_cart) {
+      // tồn tại => +1
+      product_cart.quantity++;
+
+      // Tạo một bản sao mới của giỏ hàng để cập nhật thông tin sản phẩm
+      const updatedCart = [...cart];
+
+      //lưu vào local
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // Cập nhật lại thông tin sản phẩm trong giỏ hàng
+      dispatch({ type: SET_CART, payload: updatedCart });
+    } else {
+      // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
+      let item = {
+        product_id: product.id,
+        quantity: 1,
+        product: product,
+      };
+
+      // Tạo một bản sao mới của giỏ hàng để thêm sản phẩm mới
+      const updatedCart = [...cart, item];
+
+      //lưu vào local
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // Cập nhật giỏ hàng với sản phẩm mới
+      dispatch({ type: SET_CART, payload: updatedCart });
+
     }
   };
+
 
   return (
     <>

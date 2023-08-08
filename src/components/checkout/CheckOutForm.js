@@ -65,10 +65,10 @@ function CheckOutForm(props) {
           timer: 1500,
         });
         // set local, setcart
-        // localStorage.removeItem("cart");
-        // dispatch({ type: SET_CART, payload: [] });
+        localStorage.removeItem("cart");
+        dispatch({ type: SET_CART, payload: [] });
         // chuyen huong
-        // navigate('/');
+        navigate('/');
       })
       .catch((err) => {
         Swal.fire({
